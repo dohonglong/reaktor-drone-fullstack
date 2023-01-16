@@ -10,16 +10,19 @@ const useDrones = () => {
     const fetchDrones = async () => {
       try {
         await fetch("http://localhost:4050/express_backend", {
-          mode: "no-cors",
           headers: {
             "Content-Type": "application/xml; charset=utf-8",
           },
         })
           .then((response) => response.text())
           .then((data) => {
+            console.log(data);
             var xml = new XMLParser().parseFromString(data);
-            console.log("data");
-            setDrones(xml);
+            console.log(xml);
+            // setDrones(xml);
+            // var xml = new XMLParser().parseFromString(data);
+            // console.log(xml);
+            // console.log(xml.getElementsByTagName("report"));
           });
       } catch (error) {
         setError(error);

@@ -1,13 +1,13 @@
 import "./App.css";
-//import useDrones from "./custom-hooks/getDrones";
+import useDrones from "./custom-hooks/getDrones";
 
 function App() {
-  //const [drones, error] = useDrones([]);
+  const [drones, error] = useDrones([]);
 
   /* Catch error */
-  // if (error) {
-  //   return <p>Something went wrong.</p>;
-  // }
+  if (error) {
+    return <p>Something went wrong.</p>;
+  }
 
   return (
     <div className="App">
