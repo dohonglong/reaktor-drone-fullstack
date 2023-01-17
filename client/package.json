@@ -17,7 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:4050",
+  "proxy": "https://reaktor-drone-fullstack.onrender.com/express_backend",
   "eslintConfig": {
     "extends": [
       "react-app",
