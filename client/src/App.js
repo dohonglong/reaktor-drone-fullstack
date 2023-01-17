@@ -13,9 +13,9 @@ function App() {
     <div className="App">
       <h1>REAKTOR PROJECT - DRONE FLY - LONG DO</h1>
 
-      {/* {drones.map((drone) => (
-        <p>{drone.serialNumber}</p>
-      ))} */}
+      {drones.map((drone) => (
+        <p key={drone.serialNumber}>{drone.serialNumber}</p>
+      ))}
     </div>
   );
 }

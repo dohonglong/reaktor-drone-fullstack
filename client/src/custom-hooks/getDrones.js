@@ -1,6 +1,6 @@
 //import axios from "axios";
 import { useEffect, useState } from "react";
-import XMLParser from "react-xml-parser";
+const { XMLParser } = require("fast-xml-parser");
 
 const useDrones = () => {
   const [drones, setDrones] = useState([]);
@@ -19,13 +19,13 @@ const useDrones = () => {
         )
           .then((response) => response.text())
           .then((data) => {
-            console.log(data);
-            var xml = new XMLParser().parseFromString(data);
-            console.log(xml);
-            // setDrones(xml);
-            // var xml = new XMLParser().parseFromString(data);
-            // console.log(xml);
-            // console.log(xml.getElementsByTagName("report"));
+            //console.log(data);
+            const parser = new XMLParser();
+            const xml = parser.parse(data);
+            const droneValue = xml.report.capture.drone;
+            console.log(droneValue);
+
+            setDrones(droneValue);
           });
       } catch (error) {
         setError(error);
