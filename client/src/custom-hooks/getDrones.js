@@ -23,7 +23,7 @@ const useDrones = () => {
             const parser = new XMLParser();
             const xml = parser.parse(data);
             const droneValue = xml.report.capture.drone;
-            console.log(droneValue);
+            //console.log(droneValue);
 
             setDrones(droneValue);
           });
