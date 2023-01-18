@@ -1,4 +1,5 @@
 import "./App.css";
+
 import useDrones from "./custom-hooks/getDrones";
 
 function App() {
@@ -18,18 +19,25 @@ function App() {
           <tbody>
             <tr>
               <th>Serial Number</th>
-              <th>First name</th>
               <th>Model</th>
               <th>Manufacturer</th>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>E-mail</th>
               <th>Position X</th>
               <th>Position Y</th>
             </tr>
             {drones.map((drone) => (
               <tr key={drone.serialNumber}>
                 <td>{drone.serialNumber}</td>
-                <td>{drone.firstName}</td>
+
                 <td>{drone.model}</td>
                 <td>{drone.manufacturer}</td>
+                <td>
+                  {drone.firstName} {drone.lastName}
+                </td>
+                <td>{drone.phoneNumber}</td>
+                <td>{drone.email}</td>
                 <td>{drone.positionX}</td>
                 <td>{drone.positionY}</td>
               </tr>

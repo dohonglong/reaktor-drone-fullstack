@@ -50,10 +50,15 @@ const useDrones = () => {
         setError(error);
       }
     };
-    fetchDrones();
+
+    // Keep the drone lists updated every 2 seconds
+    const interval = setInterval(() => {
+      fetchDrones();
+    }, 2000);
 
     return () => {
       setDrones([]);
+      clearInterval(interval);
     };
   }, [fetchDroneValue]);
 
@@ -61,3 +66,9 @@ const useDrones = () => {
 };
 
 export default useDrones;
+// useEffect(() => {
+//   const interval = setInterval(()=> {
+//     fetchDrones()
+//   }, 2000)
+//   return () => clearInterval(interval) ;
+// }, []);
