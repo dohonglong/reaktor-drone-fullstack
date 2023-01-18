@@ -1,11 +1,24 @@
-//import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 const { XMLParser } = require("fast-xml-parser");
 
 const useDrones = () => {
   const [drones, setDrones] = useState([]);
   const [error, setError] = useState();
 
+  //Fetch all the data about the user, from the serialNumber from fetchDrones
+  const fetchDroneValue = useCallback(async (serialNumber) => {
+    try {
+      const response = await fetch(
+        `https://reaktor-drone-fullstack.onrender.com/drones/${serialNumber}`
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      setError(error);
+    }
+  }, []);
+
+  //fetch the drones
   useEffect(() => {
     const fetchDrones = async () => {
       try {
@@ -18,21 +31,31 @@ const useDrones = () => {
           }
         )
           .then((response) => response.text())
-          .then((data) => {
+          .then(async (data) => {
             //console.log(data);
             const parser = new XMLParser();
             const xml = parser.parse(data);
-            const droneValue = xml.report.capture.drone;
-            //console.log(droneValue);
-
-            setDrones(droneValue);
+            const droneValues = xml.report.capture.drone;
+            const promises = droneValues.map(async (droneValue) => {
+              return await fetchDroneValue(droneValue.serialNumber);
+            });
+            //console.log(droneValues);
+            await Promise.all(promises).then((values) => {
+              droneValues.map((item, i) => Object.assign(item, values[i]));
+              console.log(droneValues);
+              setDrones(droneValues);
+            });
           });
       } catch (error) {
         setError(error);
       }
     };
     fetchDrones();
-  }, []);
+
+    return () => {
+      setDrones([]);
+    };
+  }, [fetchDroneValue]);
 
   return [drones, error];
 };

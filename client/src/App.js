@@ -18,6 +18,7 @@ function App() {
           <tbody>
             <tr>
               <th>Serial Number</th>
+              <th>First name</th>
               <th>Model</th>
               <th>Manufacturer</th>
               <th>Position X</th>
@@ -26,6 +27,7 @@ function App() {
             {drones.map((drone) => (
               <tr key={drone.serialNumber}>
                 <td>{drone.serialNumber}</td>
+                <td>{drone.firstName}</td>
                 <td>{drone.model}</td>
                 <td>{drone.manufacturer}</td>
                 <td>{drone.positionX}</td>
